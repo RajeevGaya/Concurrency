@@ -1,0 +1,13 @@
+my:
+  greet1: Hello World from Local Git Repo
+pending:
+  courses: 
+     list: java8,spring boot,Junit,Mockito
+carrer: {Tenth :'2005',12 :'2007',BCA : 'Gaya Coolege,Gaya 2008'}
+server:
+  port: 8091
+
+db:
+  connection : connection-String-Test-Env-DB Prod Git DB
+  host: 127.0.0.1
+  port : 1575

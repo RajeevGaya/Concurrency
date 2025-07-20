@@ -1,0 +1,25 @@
+my:
+  greet: Hello World
+pending:
+  courses:
+    list: java8,spring boot,Junit,Mockito
+carrer: { Tenth :'2005', 12 :'2007', BCA: "Gaya Coolege,Gaya 2008" }
+server:
+  port: 8090
+
+db:
+  connection: connection-String-Test-Env-DB
+  host: 127.0.0.1
+  port: 1501
+
+spring:
+  cloud:
+    config:
+      url: http://localhost:8888
+
+spring.application.name: spring-boot-rajeev-config
+
+#spring.config.import=configserver:http://localhost:8888
+# spring:
+#   config:
+#     import: "configserver:http://localhost:8888"
