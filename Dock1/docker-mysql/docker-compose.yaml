@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: 'mysql:latest'
+    environment:
+      - MYSQL_ROOT_PASSWORD:value
+        MYSQL_DATABASE:TXDB
+    ports:
+      -'3307:3306'
+  
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    image: docker-mysql:1.0
+    depends_on:
+      - mysql-db
+    ports:
+       9191:8181  
+    environment:
+      - SPRING_DATASOURCE_URL:=jdbc:mysql://mysql-db:3306/TXDB

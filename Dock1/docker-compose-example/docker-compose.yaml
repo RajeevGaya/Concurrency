@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  mysql-db:
+    image: 'mysql:latest'
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sys
+    ports:
+      - '3308:3306'
+    volumes:
+      - mysql-backup:/var/lib/mysql
+
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: transaction-service:4.0
+    depends_on:
+      - mysql-db
+    ports:
+      - '9494:8787'
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql-db:3306/sys'
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: password
+volumes:
+  mysql-backup:

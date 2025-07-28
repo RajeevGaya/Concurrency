@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "maven"
+    }
+
+    stages {
+        stage('SCM checkout') {
+            steps {
+               checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RajeevGaya/cicd1.git']])
+            }
+        }
+        stage('Build Process') {
+            steps {
+               bat 'mvn clean install'
+            }
+        }
+    }
+    post{
+        always{
+            emailext attachLog: true, body: '''
+            <html>
+               <body>
+                  <p>BUILD STATUS :- ${BUILD_STATUS}</p>
+                  <p>BUILD NUMBER :- ${BUILD_NUMBER}</p>
+                   <p>CHECK THE  <a href="${BUILD_URL}"> Console Output</a></p>
+                </body>
+            </html>''', 
+            mimeType: 'text/html', replyTo: 'rajeevispring@gmail.com', subject: 'Pipe Line Status :- ${BUILD_NUMBER}', to: 'rajeevispring@gmail.com'
+        }
+    }
+}
